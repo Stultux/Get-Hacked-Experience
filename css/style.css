@@ -1,1 +1,24 @@
-/* Selektoren müssen noch gemacht werden*/
+body {
+  background-color: #eef2f5;
+}
+.navbar-brand, .nav-link {
+  font-weight: 500;
+}
+.folder-tree li {
+  margin-bottom: 0.5rem;
+}
+.list-group-item.active {
+  background-color: #e9f3ff;
+  border-color: #cfe2ff;
+}
+.list-group-item:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+.sender, .email {
+  font-size: 0.9rem;
+  color: #555;
+}
+#body p {
+  margin-bottom: 1rem;
+}
