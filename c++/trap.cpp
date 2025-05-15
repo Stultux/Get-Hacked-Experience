@@ -3,8 +3,10 @@
 #include <thread>
 #include <atomic>
 
+
 std::atomic<bool> running(true);
 HHOOK keyboardHook = NULL;
+HHOOK mouseHook = NULL;
 
 // Low-Level Keyboard Hook Callback
 LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
@@ -28,6 +30,14 @@ LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
     return 1;
 }
 
+LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam){
+    if(nCode == HC_ACTION){
+        //Blockiert alle Maus inputs
+        return 1;
+    }
+    return CallNextHookEx(mouseHook, nCode, wParam, lParam);
+}
+
 // Funktion zum Abspielen des Videos im Vollbildmodus
 void playVideo() {
     const std::string videoPath = "../Assets/Video.mp4";
@@ -42,6 +52,7 @@ int main() {
     std::thread videoThread(playVideo);
 
     // Installiere den globalen Low-Level-Hook
+    mouseHook = SetWindowsHookEx(WH_MOUSE_LL, LowLevelMouseProc, NULL, 0);
     keyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, NULL, 0);
 
     // Nachrichtenschleife starten
@@ -56,6 +67,7 @@ int main() {
     }
 
     // Entferne den Hook beim Beenden
+    UnhookWindowsHookEx(mouseHook);
     UnhookWindowsHookEx(keyboardHook);
 
     // Warte auf das Ende des Video-Threads
