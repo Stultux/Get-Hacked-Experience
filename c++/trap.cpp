@@ -40,7 +40,7 @@ LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam){
 
 // Funktion zum Abspielen des Videos im Vollbildmodus
 void playVideo() {
-    const std::string videoPath = "../Assets/Video.mp4";
+    const std::string videoPath = "..\\Assets\\Video.mp4";
     std::cout << "Video wird gestartet..." << std::endl;
     system(("start /max " + videoPath).c_str());
 }

@@ -22,6 +22,5 @@
 
   function starteTrap(){
     alert("lso");
-    const response = fetch('http://localhost:3000/run-cpp');
-    // window.open("C:\\Users\\Viktor\\Documents\\GitHub\\LF4-Project\\c++startTrap.bat");
+    window.open("..\\c++\\trap.exe");
   }
