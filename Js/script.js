@@ -21,6 +21,5 @@
   });
 
   function starteTrap(){
-    alert("lso");
     window.open("..\\c++\\trap.exe");
   }
