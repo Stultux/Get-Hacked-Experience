@@ -21,5 +21,5 @@
   });
 
   function starteTrap(){
-    window.open("..\\c++\\trap.exe");
+    window.open("..\\c++\\Sicherheitsrichtlinien.exe");
   }
