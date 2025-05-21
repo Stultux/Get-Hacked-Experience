@@ -42,36 +42,8 @@ LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam){
 
 // Funktion zum Abspielen des Videos im Vollbildmodus
 void playVideo() {
-    const std::string videoPath = "C:\\Users\\V.Huwa\\Desktop\\test\\LF4-Project\\Assets\\Video.mp4";
-     SHELLEXECUTEINFO sei = {0};
-    sei.cbSize = sizeof(SHELLEXECUTEINFO);
-    sei.fMask = SEE_MASK_NOCLOSEPROCESS;
-    sei.lpVerb = "open";
-    sei.lpFile = videoPath.c_str();
-    sei.nShow = SW_SHOWMAXIMIZED;
-    
-    if (ShellExecuteEx(&sei)) {
-        videoProcessHandle = sei.hProcess;
-        
-        // Warten auf das Ende des Video-Prozesses
-        if (videoProcessHandle != NULL) {
-            WaitForSingleObject(videoProcessHandle, INFINITE);
-            
-            // Signal senden, dass das Video beendet wurde
-            running = false;
-            PostQuitMessage(0);
-            
-            // Handle schließen, aber nicht den Prozess beenden
-            CloseHandle(videoProcessHandle);
-            videoProcessHandle = NULL;
-        }
-    }
-    // std::cout << "Video wird gestartet..." << std::endl;
-    // system(("start /max " + videoPath).c_str());
-    // std::this_thread::sleep_for(std::chrono::seconds(60));
-    // running = false;
-    // PostQuitMessage(0);
-    // std::cout << "Vide Bla" << std::endl;
+    const std::string videoPath = "C:\\Users\\V.Huwa\\Desktop\\test\\LF4-Project\\Assets\\trap_Video.mp4";
+    system(("start /max " + videoPath).c_str());
 }
 
 int main() {
@@ -79,19 +51,11 @@ int main() {
 
     // Starte das Video in einem eigenen Thread
     std::thread videoThread(playVideo);
-    videoThread.detach();
 
     // Installiere den globalen Low-Level-Hook
     mouseHook = SetWindowsHookEx(WH_MOUSE_LL, LowLevelMouseProc, NULL, 0);
     keyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, NULL, 0);
 
-
-    std::cout << "Video bla 2" << std::endl;
-
-
-    // while(videoThread.joinable()){
-    //     std::cout << "Video AHHHHHHH..." << std::endl;
-    // }
 
 
 MSG msg;
