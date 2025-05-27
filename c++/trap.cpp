@@ -38,7 +38,7 @@ LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam){
 
 
 void playVideo() {
-    const std::string videoPath = "..\\Assets\\trap_Video.mp4";
+    const std::string videoPath = "../Assets/trap_Video.mp4";
     system(("start /max " + videoPath).c_str());
 }
 
